@@ -20,7 +20,7 @@ def get_csv_compra():
     page = 0
     records = []
 
-    while page<10:
+    while page<4:
 
         prices = driver.find_element(By.XPATH, '//*[@id="__APP"]/div[2]/main/div[1]/div[4]/div/div[2]')
 
@@ -28,16 +28,31 @@ def get_csv_compra():
 
         for price in children:
             mercadoPago = False
+            bbva = False
+            efectivo = False
+            transferencia = False
+            uala = False
             precio = price.find_element(By.CLASS_NAME,'css-1m1f8hn').text
             html = price.get_attribute('innerHTML')
             if 'Mercadopago' in html:
                 print('Acepta Mercado Pago')
                 mercadoPago = True
-            else:
-                print('No acepta Mercado Pago')
-            print('Precio en ARS $',precio)
+            if 'fectivo' in html:
+                print('Acepta Efectivo')
+                efectivo = True
+            if 'BBVA' in html:
+                print('Acepta BBVA')
+                bbva = True
+            if 'bancaria' in html:
+                print('Acepta Transferencia')
+                transferencia = True
+            if 'Uala' in html:
+                print('Acepta Uala')
+                uala = True
 
-            records.append({'price':precio,'mercadoPago':mercadoPago,'datetime':datetime.datetime.now(),'operation':'Compra'})
+            print('Precio en ARS $', precio)
+            records.append({'price': precio, 'mercadoPago': mercadoPago, 'efectivo': efectivo, 'transferencia': transferencia,'bbva': bbva, 'uala': uala, 'datetime': datetime.datetime.now(), 'operation': 'Compra'})
+
 
         print('Cambiando pagina...', page)
 
@@ -51,7 +66,7 @@ def get_csv_compra():
     df = pd.DataFrame(records)
 
     print(df)
-    df.to_csv('compra.csv')
+    df.to_csv('compra' + datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '.csv')
 
 
 def get_csv_venta():
@@ -61,7 +76,7 @@ def get_csv_venta():
     page = 0
     records = []
 
-    while page<10:
+    while page<4:
 
         prices = driver.find_element(By.XPATH, '//*[@id="__APP"]/div[2]/main/div[1]/div[4]/div/div[2]')
 
@@ -69,16 +84,30 @@ def get_csv_venta():
 
         for price in children:
             mercadoPago = False
+            bbva = False
+            efectivo = False
+            transferencia = False
+            uala = False
             precio = price.find_element(By.CLASS_NAME,'css-1m1f8hn').text
             html = price.get_attribute('innerHTML')
             if 'Mercadopago' in html:
                 print('Acepta Mercado Pago')
                 mercadoPago = True
-            else:
-                print('No acepta Mercado Pago')
-            print('Precio en ARS $',precio)
+            if 'fectivo' in html:
+                print('Acepta Efectivo')
+                efectivo = True
+            if 'BBVA' in html:
+                print('Acepta BBVA')
+                bbva = True
+            if 'bancaria' in html:
+                print('Acepta Transferencia')
+                transferencia = True
+            if 'Uala' in html:
+                print('Acepta Uala')
+                uala = True
 
-            records.append({'price':precio,'mercadoPago':mercadoPago,'datetime':datetime.datetime.now(),'operation':'Venta'})
+            print('Precio en ARS $',precio)
+            records.append({'price':precio,'mercadoPago':mercadoPago,'efectivo':efectivo,'transferencia':transferencia,'bbva':bbva,'uala':uala,'datetime':datetime.datetime.now(),'operation':'Venta'})
 
         print('Cambiando pagina...', page)
 
@@ -92,6 +121,6 @@ def get_csv_venta():
     df = pd.DataFrame(records)
 
     print(df)
-    df.to_csv('venta.csv')
+    df.to_csv('venta' + datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '.csv')
 
-get_csv_venta()
+get_csv_compra()
