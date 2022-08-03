@@ -1,0 +1,11 @@
+,price,mercadoPago,efectivo,transferencia,bbva,uala,datetime,operation
+0,282.98,True,False,False,False,False,2022-08-03 13:49:04.566871,Compra
+1,283.00,True,False,False,False,False,2022-08-03 13:49:04.600867,Compra
+2,283.00,True,False,False,False,False,2022-08-03 13:49:04.629873,Compra
+3,283.40,True,False,True,False,False,2022-08-03 13:49:04.659873,Compra
+4,283.50,False,False,False,False,False,2022-08-03 13:49:04.688871,Compra
+5,283.99,True,False,True,False,False,2022-08-03 13:49:04.719871,Compra
+6,284.00,True,False,False,False,False,2022-08-03 13:49:04.748869,Compra
+7,284.00,False,False,False,False,True,2022-08-03 13:49:04.776867,Compra
+8,285.00,True,False,False,False,True,2022-08-03 13:49:04.802598,Compra
+9,295.00,False,False,False,False,True,2022-08-03 13:49:04.826598,Compra
